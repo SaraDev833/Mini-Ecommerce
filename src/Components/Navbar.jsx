@@ -24,7 +24,7 @@ const Navbar = () => {
                         <li className='text-white list-none text-lg font-medium'><a href="#">Categories</a></li>
                     </ul>
                 </div>
-                <div className="signin flex items-center">
+                <div className="signin flex gap-3 items-center">
                     <span class="material-symbols-outlined text-white text-2xl">
                         shopping_cart
                     </span>

@@ -2,7 +2,8 @@ import React from 'react'
 import Navbar from '../Components/Navbar'
 import Categories from '../Components/Categories'
 import Products from '../Components/Products/Products'
-import Carts from '../Components/Carts'
+import Carts from '../Components/Carts/Carts'
+import Footer from '../Components/Footer'
 
 const home = () => {
   return (
@@ -12,6 +13,7 @@ const home = () => {
          <Categories/>
          <Products/>
          <Carts/>
+         <Footer/>
       </div>
     </div>
   )

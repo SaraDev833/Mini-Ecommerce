@@ -5,7 +5,7 @@ const categoryLinks= [ "Electronics" ,"Fashion" , "Home and Kitchen" , "Beauty" 
 
 const Categories = () => {
   return (
-    <div className='w-[20%] my-3 bg-white border-white/15 shadow rounded-lg min-h-fit'>
+    <div className='w-[20%] my-3 bg-white border-white/15 shadow rounded-lg h-[600px]'>
    <ul className='flex flex-col gap-3 py-2 px-2'>
     <li className='text-lg font-medium'>Categories</li>
     <li className='text-sm  bg-blue-600/20 py-2 px-3 font-medium rounded-md text-blue-600'><a href="">All Categories</a></li>
