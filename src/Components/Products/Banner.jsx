@@ -7,7 +7,7 @@ const Banner = ({title , des}) => {
         <div className='absolute inset-0  bg-blue-600/20 z-20 overflow-hidden flex flex-col justify-center gap-3 items-start px-6'>
               <h2 className='text-4xl text-white font-medium'>{title}</h2>
               <p className='text-slate-950 text-sm font-medium'>{des}</p>
-                <button className='py-2 px-3 text-white font-medium bg-blue-700 hover:bg-blue-400 rounded-md'>Shop Now</button>
+                <button className='py-2 px-3 text-white font-medium bg-blue-700 hover:bg-blue-600 rounded-md'>Shop Now</button>
         </div>
     </div>
   )

@@ -1,10 +1,11 @@
 import React from 'react'
-
+import products from '../../Data/Product'
+import ProductCard from './ProductCard'
 const AllProducts = () => {
     const categories = ["Electronics", "Fashion", "Home and Kitchen", "Beauty", "Sports", "Books", "Accessories"]
     const latests = ["Short by Latest", "Short by Oldest"]
     return (
-        <div className='my-3 '>
+        <div className='my-4 '>
             <div className='flex justify-between items-center'>
                 <h2 className='text-lg font-bold'>All Products</h2>
                 <div className='flex gap-3'>
@@ -25,6 +26,11 @@ const AllProducts = () => {
                     </select>
                 </div>
             </div>
+                <div className="my-3 flex flex-wrap justify-between gap-8">
+                    {products.map((product)=>(
+                    <ProductCard product={product}/>
+                    ))}
+                </div>
         </div>
     )
 }
