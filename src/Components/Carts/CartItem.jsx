@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 
 const CartItem = () => {
+  const [qty, setQty] = useState(1);
+  const increase = ()=>(setQty(qty + 1))
+  const decrease = ()=>{
+    if(qty > 1){
+  setQty(qty - 1 )
+    }
+    return qty
+  }
+
   return (
     <div className="flex justify-between items-center p-2 border rounded-md">
 
@@ -16,9 +25,9 @@ const CartItem = () => {
       </div>
 
       <div className="flex gap-2 items-center">
-        <button className="border px-2">+</button>
-        <span>1</span>
-        <button className="border px-2">-</button>
+        <button className="border px-2" onClick={increase}>+</button>
+        <span>{qty}</span>
+        <button className="border px-2" onClick={decrease}>-</button>
       </div>
 
     </div>

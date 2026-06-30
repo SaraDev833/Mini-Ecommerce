@@ -1,9 +1,22 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 // import { Gift } from 'lucide-react'
 
-const categoryLinks= [ "Electronics" ,"Fashion" , "Home and Kitchen" , "Beauty" , "Sports" , "Books" , "Accessories"]
+
 
 const Categories = () => {
+  const [categories , setCategories] = useState([]);
+useEffect(()=>{
+   try {
+     const fetchCat = async()=>{
+      const response = await axios("http://localhost:3000/api/categories");
+    setCategories(response.data)
+    }
+    fetchCat()
+   } catch (error) {
+     console.log(error)
+   }
+},[])
   return (
     <div className="w-full lg:w-[20%] my-3 bg-white shadow rounded-lg">
 
@@ -15,7 +28,7 @@ const Categories = () => {
           All Categories
         </li>
 
-        {categoryLinks.map((category, index) => (
+        {categories.map((category, index) => (
           <li
             key={index}
             className="text-sm py-2 px-3 hover:text-blue-600 cursor-pointer"

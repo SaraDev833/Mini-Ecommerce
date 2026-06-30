@@ -1,8 +1,36 @@
-import React, { useState } from "react";
-import products from "../../Data/Product";
+import React, { useEffect, useState } from "react";
+
 import ProductCard from "./ProductCard";
+import axios from "axios";
 
 const AllProducts = () => {
+
+const[products, setProducts] = useState([])
+const [categories , setCategories] = useState([])
+
+useEffect(()=>{
+    try {
+      const data = async()=>{
+        const response =await  axios.get("http://localhost:3000/api/products")
+         setProducts(response.data)
+      }
+      data()
+    } catch (error) {
+      
+    }
+},[])
+useEffect(()=>{
+    try {
+      const data = async()=>{
+        const response =await  axios.get("http://localhost:3000/api/categories")
+         setCategories(response.data)
+      }
+      data()
+    } catch (error) {
+      
+    }
+},[])
+
   const [currentPage, setCurrentPage] = useState(1);
 
   const productPerPage = 8;
@@ -20,11 +48,15 @@ const AllProducts = () => {
 
         <div className="flex gap-2">
           <select className="border p-1 text-sm rounded-md">
-            <option>All Category</option>
+             <option>All categories</option>
+            {categories.map((category)=>(
+                <option>{category}</option>
+            ))}
           </select>
 
           <select className="border p-1 text-sm rounded-md">
             <option>Sort by Latest</option>
+            <option>Sort by oldest</option>
           </select>
         </div>
       </div>
@@ -37,7 +69,7 @@ const AllProducts = () => {
       </div>
 
       {/* Pagination */}
-      <div className="flex justify-center gap-2 mt-6 flex-wrap">
+      <div className="flex justify-center gap-2 mt-6 flex-wrap lg:mb-50">
         {[...Array(totalPages)].map((_, index) => (
           <button
             key={index}
