@@ -1,58 +1,56 @@
-import React, { useState } from 'react'
-import products from '../../Data/Product'
-import ProductCard from './ProductCard'
+import React, { useState } from "react";
+import products from "../../Data/Product";
+import ProductCard from "./ProductCard";
+
 const AllProducts = () => {
-    const [currentPage, setCurrentPage] = useState(1);
-    const productPerPage = 8;
-    const lastIndex = currentPage * productPerPage;
-    const firstIndex = lastIndex - productPerPage;
-    const currentProducts = products.slice(firstIndex, lastIndex);
-    const totalPages = Math.ceil(products.length / productPerPage);
+  const [currentPage, setCurrentPage] = useState(1);
 
-    
-    const categories = ["Electronics", "Fashion", "Home and Kitchen", "Beauty", "Sports", "Books", "Accessories"]
-    const latests = ["Short by Latest", "Short by Oldest"]
-    return (
-        <div className='mt-4 mb-40'>
-            <div className='flex justify-between items-center'>
-                <h2 className='text-lg font-bold'>All Products</h2>
-                <div className='flex gap-3'>
+  const productPerPage = 8;
+  const lastIndex = currentPage * productPerPage;
+  const firstIndex = lastIndex - productPerPage;
 
-                    <select name="categories" id="category" className='border border-slate-500 shadow p-1 rounded-md'>
-                        <option value="" className='text-sm'>All Category</option>
-                        {categories.map((category) => (
-                            <option className="text-sm" value="{category[]}">{category}</option>
+  const currentProducts = products.slice(firstIndex, lastIndex);
+  const totalPages = Math.ceil(products.length / productPerPage);
 
-                        ))}
-                    </select>
-                    <select name="short" id="short" className='border border-slate-500 shadow p-1 rounded-md'>
+  return (
+    <div className="mt-4 mb-10">
 
-                        {latests.map((latest) => (
-                            <option className='text-sm' value="{latest[]}">{latest}</option>
+      <div className="flex flex-col sm:flex-row justify-between gap-3">
+        <h2 className="font-bold text-lg">All Products</h2>
 
-                        ))}
-                    </select>
-                </div>
-            </div>
-                <div className="mt-3 mb-9 flex flex-wrap  gap-8">
-                    {currentProducts.map((product)=>(
-                    <ProductCard product={product}/>
-                    ))}
-                </div>
-               <div className='flex  justify-evenly '>
-                 {[...Array(totalPages)].map((_, index) =>(
-                    <button className='hover:bg-blue-600 py-2 px-4 hover:text-white text-sm bg-white text-black border'
-                    key={index}
-                    onClick={()=> setCurrentPage(index + 1)}
-                    
-                    >
-          <div >{index + 1}</div>
-                    </button>
-                ))}
-               </div>
-               
+        <div className="flex gap-2">
+          <select className="border p-1 text-sm rounded-md">
+            <option>All Category</option>
+          </select>
+
+          <select className="border p-1 text-sm rounded-md">
+            <option>Sort by Latest</option>
+          </select>
         </div>
-    )
-}
+      </div>
 
-export default AllProducts
+      {/* GRID */}
+      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+        {currentProducts.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
+
+      {/* Pagination */}
+      <div className="flex justify-center gap-2 mt-6 flex-wrap">
+        {[...Array(totalPages)].map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentPage(index + 1)}
+            className="px-3 py-1 border hover:bg-blue-600 hover:text-white"
+          >
+            {index + 1}
+          </button>
+        ))}
+      </div>
+
+    </div>
+  );
+};
+
+export default AllProducts;

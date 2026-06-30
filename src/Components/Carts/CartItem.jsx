@@ -1,28 +1,28 @@
-import React from 'react'
+import React from "react";
 
-const CartItem = ({ product }) => {
-    console.log(product)
-    return (
-        <div className='p-2 flex justify-between items-center  bg-white border-white/15 shadow rounded-lg '>
-            <img src={product.image} alt="" className='h-12 w-12 object-cover' />
-            <div className="text flex flex-col gap-2">
-                <h3 className='text-slate-700'>{product.name}</h3>
-                <p className='font-bold'>{product.price}</p>
-                <div className='flex gap-3 items-center jus'>
-                    <button className='border py-1 px-2'>+</button>
-                    <span >2</span>
-                    <button className='border py-1 px-2'>-</button>
-                </div>
-                <div>
-                </div>
-            </div>
-            <div>
-                <span class="material-symbols-outlined">
-                    delete
-                </span>
-            </div>
-        </div>
-    )
-}
+const CartItem = () => {
+  return (
+    <div className="flex justify-between items-center p-2 border rounded-md">
 
-export default CartItem
+      <img
+        src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e"
+        className="h-10 w-10 object-cover"
+        alt=""
+      />
+
+      <div className="text-xs">
+        <p>Product Name</p>
+        <p className="font-bold">$50</p>
+      </div>
+
+      <div className="flex gap-2 items-center">
+        <button className="border px-2">+</button>
+        <span>1</span>
+        <button className="border px-2">-</button>
+      </div>
+
+    </div>
+  );
+};
+
+export default CartItem;
