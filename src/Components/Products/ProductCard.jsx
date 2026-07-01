@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
 
 const ProductCard = ({ product }) => {
+
+  const {addToCart , cart} = useContext(CartContext);
   return (
     <div className="w-full bg-white shadow rounded-md overflow-hidden">
 
@@ -18,7 +21,8 @@ const ProductCard = ({ product }) => {
           <span className="font-bold">${product.price}</span>
         </div>
 
-        <button className="mt-3 w-full bg-blue-600 text-white py-2 text-sm rounded-md">
+        <button className="mt-3 w-full bg-blue-600 text-white py-2 text-sm rounded-md" onClick={()=>addToCart(product)}>
+          {console.log(cart)}
           Add to Cart
         </button>
       </div>

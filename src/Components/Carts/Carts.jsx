@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import CartItem from "./CartItem";
+import { CartContext } from "../../context/CartContext";
 
 const Carts = () => {
+    const { cart, totalPrice } = useContext(CartContext);
   return (
     <div className="w-full lg:w-[20%] my-3 bg-white shadow rounded-lg p-2 mb-50 lg:mb-0">
 
@@ -11,13 +13,13 @@ const Carts = () => {
 
       <div className="flex flex-col gap-3 mt-3 mb-10">
         {/* example static */}
-        {[1, 2, 3].map((item) => (
-          <CartItem key={item} />
+        {cart.map((item) => (
+          <CartItem key={item} item={item} />
         ))}
       </div>
 
       <button className="w-full mt-4 bg-blue-600 text-white py-2 rounded-md">
-        Checkout
+        Total Price : ${totalPrice}
       </button>
 
     </div>

@@ -1,15 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { CartContext } from "../../context/CartContext";
 
-const CartItem = () => {
-  const [qty, setQty] = useState(1);
-  const increase = ()=>(setQty(qty + 1))
-  const decrease = ()=>{
-    if(qty > 1){
-  setQty(qty - 1 )
-    }
-    return qty
-  }
-
+const CartItem = ({item}) => {
+  const {
+    increaseQuantity,
+    decreaseQuantity,
+    removeProduct,
+  } = useContext(CartContext);
   return (
     <div className="flex justify-between items-center p-2 border rounded-md">
 
@@ -20,16 +17,20 @@ const CartItem = () => {
       />
 
       <div className="text-xs">
-        <p>Product Name</p>
-        <p className="font-bold">$50</p>
+        <p>{item.name}</p>
+        <p className="font-bold">${item.price}</p>
       </div>
 
       <div className="flex gap-2 items-center">
-        <button className="border px-2" onClick={increase}>+</button>
-        <span>{qty}</span>
-        <button className="border px-2" onClick={decrease}>-</button>
+        <button className="border px-2" onClick={() => increaseQuantity(item.id)}>+</button>
+        <span>{item.quantity}</span>
+        <button className="border px-2" onClick={() => decreaseQuantity(item.id)}>-</button>
       </div>
-
+        <div className="remove text-red-700" onClick={()=>removeProduct(item.id)}>
+        <span class="material-symbols-outlined">
+delete
+</span>
+        </div>
     </div>
   );
 };
