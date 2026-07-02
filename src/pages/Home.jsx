@@ -4,6 +4,7 @@ import Categories from "../Components/Categories";
 import Products from "../Components/Products/Products";
 import Carts from "../Components/Carts/Carts";
 import Footer from "../Components/Footer";
+import Popup from "../Components/Popup";
 
 const Home = () => {
   return (
@@ -15,7 +16,7 @@ const Home = () => {
         <Products />
         <Carts />
       </div>
-
+            <Popup/>
       <Footer />
     </div>
   );

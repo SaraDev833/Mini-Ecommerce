@@ -7,11 +7,11 @@ import { PopupContext } from '../context/PopupContext.jsx';
 
 
 const Categories = () => {
-  const { popUp, setPopUp } = useContext(PopupContext);
+  const { openPop } = useContext(PopupContext);
   return (
     <div className="w-full lg:w-[20%] bg-white shadow rounded-lg p-4">
       <h3 className="font-bold text-lg mb-4">Why ShopLite?</h3>
-      {popUp && <Popup title="Explore your special offer" image="/images/gift.png" des="Sorry! we have not this feature available as it is a mini ecommerce project" />}
+     
 
       <div className="flex flex-col gap-3">
         <div className="flex items-start gap-3 p-3 bg-blue-50 rounded-md">
@@ -70,7 +70,11 @@ const Categories = () => {
         <div>
           <h4 className="font-semibold text-sm">Special Offer</h4>
           <p className="text-sm">Get 20% off</p>
-          <button className="mt-2 bg-blue-600 text-white px-3 py-1 rounded-md text-sm" onClick={() => setPopUp(!popUp)}>
+          <button className="mt-2 bg-blue-600 text-white px-3 py-1 rounded-md text-sm" onClick={()=>openPop({
+              title:"Explore your gifts now!",
+              des:"This feature is not currently available",
+              image:"./images/gift.png"
+          })}>
             Shop Now
           </button>
         </div>

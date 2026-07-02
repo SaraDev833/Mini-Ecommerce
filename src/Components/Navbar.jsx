@@ -1,17 +1,18 @@
 import React, { useContext } from "react";
 import { SearchContext } from "../context/SearchContext";
 import { PopupContext } from "../context/PopupContext";
-import Popup from "./Popup";
+
 
 const Navbar = () => {
-  const {popUp, setPopUp} = useContext(PopupContext)
+
   const{ searchValue , setSearchValue} = useContext(SearchContext)
-  console.log('search value :' , searchValue)
+  const {openPop} = useContext(PopupContext)
+
   return (
     <nav className="bg-[#0B0B45] py-3 px-4 sticky top-0 z-50">
       <div className="container mx-auto flex flex-wrap items-center justify-between gap-3">
         {/* popup */}
-{popUp && <Popup title="SignUp /Signin" image = "/images/" des="This feature is not available"/>}
+
 
         {/*  */}
         {/* Logo */}
@@ -54,10 +55,15 @@ const Navbar = () => {
 
         {/* Icons */}
         <div className="flex gap-3 text-white text-2xl">
-          <span className="material-symbols-outlined cursor-pointer" onClick={()=> document.getElementById('cart').scrollIntoView({
+          <span className="material-symbols-outlined cursor-pointer" onClick={()=> document.getElementById('cart')?.scrollIntoView({
             behavior:"smooth"
           })}>shopping_cart</span>
-          <span className="material-symbols-outlined" onClick={()=>setPopUp(!popUp)}>account_circle</span>
+          <span className="material-symbols-outlined cursor-pointer" onClick={()=>openPop({
+            title:"SignIn/SignUp",
+            des:"This feature is not currently available",
+            image: "no"
+
+          })}>account_circle</span>
         </div>
 
       </div>
