@@ -2,7 +2,7 @@ import React from "react";
 
 const Banner = ({ title, des }) => {
   return (
-    <div className="relative w-full overflow-hidden rounded-md">
+    <div className="relative w-full overflow-hidden rounded-md scroll-mt-10" id="banner">
 
       <img
         src="../../images/banner.jfif"

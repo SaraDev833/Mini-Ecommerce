@@ -52,7 +52,7 @@ const AllProducts = () => {
   return (
     <div className="mt-4 mb-10">
 
-      <div className="flex flex-col sm:flex-row justify-between gap-3">
+      <div className="flex flex-col sm:flex-row justify-between gap-3 scroll-mt-24" id="products" >
         <h2 className="font-bold text-lg">All Products</h2>
 
         <div className="flex gap-2">
