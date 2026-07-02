@@ -1,79 +1,73 @@
-import { createContext, useState } from "react";
+// import { createContext, useState } from "react";
+
+import {  createContext, useState } from "react";
 
 export const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
+
   const [cart, setCart] = useState([]);
 
-  // ADD PRODUCT
+  // add to cart 
   const addToCart = (product) => {
-    const foundProduct = cart.find(
-      (item) => item.id === product.id
-    );
-
+    const foundProduct = cart.find((item) => (
+      item.id === product.id
+    ));
     if (foundProduct) {
-      const updatedCart = cart.map((item) =>
-        item.id === product.id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
-      );
-      setCart(updatedCart);
-    } else {
+      const updatedCart = cart.map((item) => (
+        item.id === foundProduct.id ? { ...item, quantity: item.quantity + 1 } : item
+      ))
+      setCart(updatedCart)
+    }
+    else {
       setCart([...cart, { ...product, quantity: 1 }]);
     }
-  };
-
-  // INCREASE
+  }
+  // 
+// increase quantity fn
   const increaseQuantity = (id) => {
-    const updatedCart = cart.map((item) =>
-      item.id === id
-        ? { ...item, quantity: item.quantity + 1 }
-        : item
-    );
-    setCart(updatedCart);
-  };
+    const updatedCart = cart.map((item) => (
+      item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+    ))
+    console.log('updatedCartIncrease:' , updatedCart)
+    setCart(updatedCart)
 
-  // DECREASE
+  }
+  // decrease quantity fn
   const decreaseQuantity = (id) => {
     const updatedCart = cart
-      .map((item) =>
-        item.id === id
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
-      )
-      .filter((item) => item.quantity > 0);
+    .map((item) => (
+      item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+    ))
+    .filter(item=> item.quantity>0 )
 
-    setCart(updatedCart);
-  };
+    setCart(updatedCart)
+  }
+// 
 
-  // REMOVE
-  const removeProduct = (id) => {
-    const updatedCart = cart.filter(
-      (item) => item.id !== id
-    );
-    setCart(updatedCart);
-  };
+// remove
+const removeCart = (id)=>{
+   const removed = cart.filter((item)=>(
+    item.id !== id
+   ))
+   setCart(removed)
+}
 
-  // TOTAL PRICE
-  const totalPrice = cart.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
+// total count
+const totalPrice = cart.reduce((total,item) => total + item.quantity * item.price, 0)
 
-  return (
-    <CartContext.Provider
-      value={{
-        cart,
-        addToCart,
-        increaseQuantity,
-        decreaseQuantity,
-        removeProduct,
-        totalPrice,
-      }}
-    >
-      {children}
-    </CartContext.Provider>
-  );
-};
 
-export default CartProvider;
+return(
+  <CartContext.Provider
+   value={{
+     addToCart , increaseQuantity , decreaseQuantity, cart, totalPrice, removeCart
+   }}
+  
+  >
+{children}
+  </CartContext.Provider>
+)
+
+}
+
+export default CartProvider

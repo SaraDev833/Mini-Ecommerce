@@ -1,35 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import ProductCard from "./ProductCard";
 import axios from "axios";
+import { SearchContext } from "../../context/SearchContext";
 
 const AllProducts = () => {
 
-const[products, setProducts] = useState([])
-const [categories , setCategories] = useState([])
+  const { searchValue, setSearchValue } = useContext(SearchContext);
+  const [products, setProducts] = useState([])
+  const [categories, setCategories] = useState([])
+  const [category , setCategory] = useState("");
+  console.log(category)
+  useEffect(() => {
+    try {
+      const data = async () => {
+        const response = await axios.get("http://localhost:3000/api/products")
+        setProducts(response.data)
+      }
+      data()
+    } catch (error) {
 
-useEffect(()=>{
+    }
+  }, [])
+  useEffect(() => {
     try {
-      const data = async()=>{
-        const response =await  axios.get("http://localhost:3000/api/products")
-         setProducts(response.data)
+      const data = async () => {
+        const response = await axios.get("http://localhost:3000/api/categories")
+        setCategories(response.data)
       }
       data()
     } catch (error) {
-      
+
     }
-},[])
-useEffect(()=>{
-    try {
-      const data = async()=>{
-        const response =await  axios.get("http://localhost:3000/api/categories")
-         setCategories(response.data)
-      }
-      data()
-    } catch (error) {
-      
-    }
-},[])
+  }, [])
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -37,7 +40,13 @@ useEffect(()=>{
   const lastIndex = currentPage * productPerPage;
   const firstIndex = lastIndex - productPerPage;
 
-  const currentProducts = products.slice(firstIndex, lastIndex);
+  const filteredProducts = products.filter((product) => (
+    product.name.toLowerCase().includes(searchValue.toLowerCase())
+  ))
+  const filteredProductsByCategory = filteredProducts.filter((product)=>(
+     product.category.toLowerCase().includes(category.toLowerCase())
+  ))
+  const currentProducts = filteredProductsByCategory.slice(firstIndex, lastIndex);
   const totalPages = Math.ceil(products.length / productPerPage);
 
   return (
@@ -47,10 +56,10 @@ useEffect(()=>{
         <h2 className="font-bold text-lg">All Products</h2>
 
         <div className="flex gap-2">
-          <select className="border p-1 text-sm rounded-md">
-             <option>All categories</option>
-            {categories.map((category)=>(
-                <option>{category}</option>
+          <select onChange={(e)=>setCategory(e.target.value)} className="border p-1 text-sm rounded-md">
+            <option>All categories</option>
+            {categories.map((category) => (
+              <option value={category} >{category}</option>
             ))}
           </select>
 

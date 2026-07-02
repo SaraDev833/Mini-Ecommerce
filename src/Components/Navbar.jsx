@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { SearchContext } from "../context/SearchContext";
 
 const Navbar = () => {
+
+  const{ searchValue , setSearchValue} = useContext(SearchContext)
+  console.log('search value :' , searchValue)
   return (
     <nav className="bg-[#0B0B45] py-3 px-4 sticky top-0 z-50">
       <div className="container mx-auto flex flex-wrap items-center justify-between gap-3">
@@ -16,13 +20,14 @@ const Navbar = () => {
         </div>
 
         {/* Search */}
-        <div className="relative w-full md:max-w-md">
+        <div className="relative w-full md:max-w-md ">
           <input
+           onChange={(e)=>setSearchValue(e.target.value)}
             type="text"
             placeholder="Search for products"
             className="w-full py-2 px-3 rounded-md text-sm bg-white outline-none"
           />
-          <span className="material-symbols-outlined absolute right-0 top-0 h-full flex items-center bg-blue-600 px-3 text-white rounded-r-md">
+          <span className="material-symbols-outlined absolute right-0 top-0 h-full  bg-blue-600 px-3 text-white rounded-r-md !flex items-center">
             search
           </span>
         </div>

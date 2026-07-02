@@ -22,7 +22,7 @@ const ProductCard = ({ product }) => {
         </div>
 
         <button className="mt-3 w-full bg-blue-600 text-white py-2 text-sm rounded-md" onClick={()=>addToCart(product)}>
-          {console.log(cart)}
+       
           Add to Cart
         </button>
       </div>

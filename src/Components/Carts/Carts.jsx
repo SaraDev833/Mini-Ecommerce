@@ -10,8 +10,11 @@ const Carts = () => {
       <div className="flex justify-between items-center">
         <h3 className="font-medium">Your Cart</h3>
       </div>
-
-      <div className="flex flex-col gap-3 mt-3 mb-10">
+  {cart.length > 0 ?  
+  
+  ( 
+  <>
+  <div className="flex flex-col gap-3 mt-3 mb-10">
         {/* example static */}
         {cart.map((item) => (
           <CartItem key={item} item={item} />
@@ -20,7 +23,11 @@ const Carts = () => {
 
       <button className="w-full mt-4 bg-blue-600 text-white py-2 rounded-md">
         Total Price : ${totalPrice}
-      </button>
+      </button> </> ) : <div className="flex items-center justify-center" >
+        <p>Cart is Empty</p>
+        
+        </div>}
+   
 
     </div>
   );
